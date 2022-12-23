@@ -16,7 +16,7 @@
             <div class="d-flex items-center">
               <input class="px-2 border form-control form-search-control bg-white" v-model="inputSearch"
                 v-on:keyup.enter="getAllPeople({ search: inputSearch })" />
-              <button class="px-3 border bg-default rounded-right" @click="getAllPeople({ search: inputSearch })">
+              <button class="px-3 border bg-primary rounded-right" @click="getAllPeople({ search: inputSearch })">
                 <i class="fa fa-search text-white"></i>
               </button>
             </div>
@@ -54,7 +54,7 @@
               }}
             </td>
             <td>
-              <base-button @click="onPreviewDetail(row.item.id)" type="info" size="sm">
+              <base-button @click="onPreviewDetail(row.item.id)" type="default" size="sm">
                 <i class="fas fa-eye"></i>
               </base-button>
               <!-- <base-button @click.prevent="onDeleteClick(row.item.id)" type="danger" size="sm"><i

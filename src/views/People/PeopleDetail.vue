@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <div class="card mb-3">
+    <div class="card mb-3" v-if="filmIds">
       <div class="card-header">Planets</div>
       <div class="card-body">
         <router-link class="btn btn-sm btn-default"
