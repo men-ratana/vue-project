@@ -14,7 +14,7 @@
           }"
         />
 
-        <sidebar-item
+        <!-- <sidebar-item
           :link="{
             name: 'Icons',
             icon: 'ni ni-planet text-blue',
@@ -27,22 +27,22 @@
             icon: 'ni ni-pin-3 text-orange',
             path: '/maps',
           }"
-        />
+        /> -->
         <sidebar-item
+          :link="{
+            name: 'People',
+            icon: 'ni ni-bullet-list-67 text-red',
+            path: '/people',
+          }"
+        />
+        <!-- <sidebar-item
           :link="{
             name: 'User Profile',
             icon: 'ni ni-single-02 text-yellow',
             path: '/profile',
           }"
-        />
-        <sidebar-item
-          :link="{
-            name: 'Tables',
-            icon: 'ni ni-bullet-list-67 text-red',
-            path: '/tables',
-          }"
-        />
-        <sidebar-item
+        /> -->
+        <!-- <sidebar-item
           :link="{
             name: 'Login',
             icon: 'ni ni-key-25 text-info',
@@ -55,7 +55,7 @@
             icon: 'ni ni-circle-08 text-pink',
             path: '/register',
           }"
-        />
+        /> -->
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">

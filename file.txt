@@ -1,0 +1,19 @@
+Exercise
+Create your own design of a web applicaiton. You can create your own layout and styling or use styling framework like Bootstrap,
+TailwindCSS, etc. You need to use Vue, can be Vue v2 or v3. Fulfill user stories below:
+
+- User story: I can see list of all people and able to navigate to next page or previous page
+- User story: I can search people by name
+- User story: I can see informations include name, gender, created, and edited. For created and edited, need to display in MMMM DD,YYYY hh:mm A format
+- User story: I can see a button to navigate to people details (HINT: use field url from response for getting people details)
+- User story: I can see people detail with all informations from response
+- User story: I can navigate to homeworld (planet) details that people belong to
+- User story: I can navigate to films details that belong to people
+- User story: I can navigate to starships details that belong to people
+- User story: I can navigate to vehicles details that belong to people
+- User story: I can navigate to species details that belong to people
+- User story (optional): In homeworld (planet) details, films details, starships details, vehicles details species details, I can navigate to other
+information that belong to each of these details.
+
+API Endpoint:
+https://swapi.dev/documentation
