@@ -9,6 +9,7 @@
   >
     <div :class="containerClasses">
       <slot name="brand">
+        <a class="btn btn-sm btn-primary" @click="$router.go(-1)"><i class="fa fa-arrow-left"></i></a>
         <router-link
           :to="$route.path"
           class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"

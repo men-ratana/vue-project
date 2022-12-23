@@ -12,6 +12,15 @@
               <span class="text-muted">{{ pagination.total }} items</span>
             </h4>
           </div>
+          <div class="col-lg-5 align-items-center">
+            <div class="d-flex items-center">
+              <input class="px-2 border form-control form-search-control bg-white" v-model="inputSearch"
+                v-on:keyup.enter="getAllPeople({ search: inputSearch })" />
+              <button class="px-3 border bg-default rounded-right" @click="getAllPeople({ search: inputSearch })">
+                <i class="fa fa-search text-white"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -27,7 +36,7 @@
 
           <template v-slot:default="row">
             <th scope="row" class="align-middle">
-              <router-link :to="{ name: 'people-detail', params: { id: row.item.index } }">
+              <router-link :to="{ name: 'people-detail', params: { id: row.item.id } }">
                 <span class="font-weight-700">{{ row.item.name }}</span>
               </router-link>
             </th>
@@ -45,7 +54,7 @@
               }}
             </td>
             <td>
-              <base-button @click="onPreviewDetail(row.item.index)" type="default" size="sm">
+              <base-button @click="onPreviewDetail(row.item.id)" type="info" size="sm">
                 <i class="fas fa-eye"></i>
               </base-button>
               <!-- <base-button @click.prevent="onDeleteClick(row.item.id)" type="danger" size="sm"><i
@@ -75,7 +84,7 @@ export default {
       items: [],
       pagination: {},
       isLoading: true,
-      deleteAlert: false,
+      inputSearch: "",
     };
   },
   created: function () {
@@ -94,14 +103,15 @@ export default {
         (res) => {
           const data = res.data;
           const per_page = 10;
-          const current_page = options ? options.page : 1;
           this.pagination = {
-            'current_page': current_page,
+            'current_page': options ? options.page : 1,
             'total_pages': Math.ceil(data.count / per_page) || 1,
             'total': data.count
           };
-          this.items = data.results.map((item, index) => {
-            item.index = index + 1 + (current_page - 1) * 10;
+          this.items = data.results.map((item) => {
+            item.id = item.url.replace(/\/+$/, "")
+              .split("/")
+              .pop();
             return item;
           });
           this.isLoading = false;
@@ -117,3 +127,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+.form-search-control {
+  height: 2.5rem !important;
+  border-radius: 0.375rem 0 0 0.375rem !important;
+}
+</style>

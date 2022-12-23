@@ -9,10 +9,13 @@ import PeopleTable from "../views/People/PeopleTable.vue";
 import PeopleDetail from "../views/People/PeopleDetail.vue";
 import PlanetDetail from "../views/People/PlanetDetail.vue";
 import FilmDetail from "../views/People/FilmDetail.vue";
+import StarshipDetail from "../views/People/StarshipDetail.vue";
+import VehicleDetail from "../views/People/VehicleDetail.vue";
+import SpecyDetail from "../views/People/SpecyDetail.vue";
+import Profile from "../views/UserProfile.vue";
 
 // import Icons from "../views/Icons.vue";
 // import Maps from "../views/Maps.vue";
-import Profile from "../views/UserProfile.vue";
 // import Tables from "../views/Tables.vue";
 // import Login from "../views/Login.vue";
 // import Register from "../views/Register.vue";
@@ -40,32 +43,32 @@ const routes = [
             components: { default: PeopleDetail },
           },
           {
-            path: "/people/:id/planet",
+            path: "/people/:id/planet/:planetId",
             name: "planet-detail",
             components: { default: PlanetDetail },
           },
           {
-            path: "/people/:id/film",
+            path: "/people/:id/film/:filmId",
             name: "film-detail",
             components: { default: FilmDetail },
           },
-          // {
-          //   path: "/people/:Bid",
-          //   name: "edit-people",
-          //   components: { default: EditPeople },
-          // },
+          {
+            path: "/people/:id/starship/:starshipId",
+            name: "starship-detail",
+            components: { default: StarshipDetail },
+          },
+          {
+            path: "/people/:id/vehicle/:vehicleId",
+            name: "vehicle-detail",
+            components: { default: VehicleDetail },
+          },
+          {
+            path: "/people/:id/specy/:specyId",
+            name: "specy-detail",
+            components: { default: SpecyDetail },
+          },
         ],
       },
-      // {
-      //   path: "/icons",
-      //   name: "icons",
-      //   components: { default: Icons },
-      // },
-      // {
-      //   path: "/maps",
-      //   name: "maps",
-      //   components: { default: Maps },
-      // },
       {
         path: "/profile",
         name: "profile",

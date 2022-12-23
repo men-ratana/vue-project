@@ -4,19 +4,61 @@
   </div>
   <template v-if="!isLoading">
     <div class="card mb-3">
+      <div class="card-header">Info</div>
       <div class="card-body">
-        <div class="row align-items-center">
-          <div class="col d-flex">
-            <pre><code>{{ user }}</code></pre>
-          </div>
-        </div>
+        <pre><code>{{ user }}</code></pre>
       </div>
     </div>
-    <router-link class="btn btn-sm btn-default" :to="{ name: 'planet-detail' }">Planets</router-link>
-    <router-link class="btn btn-sm btn-default" :to="{ name: 'film-detail' }">Films</router-link>
-    <!-- <router-link class="btn btn-sm btn-default" :to="{ name: 'people-starship' }">Starships</router-link> -->
-    <!-- <router-link class="btn btn-sm btn-default" :to="{ name: 'people-vehicle' }">Vehicles</router-link> -->
-    <!-- <router-link class="btn btn-sm btn-default" :to="{ name: 'people-species' }">Species</router-link> -->
+
+    <div class="card mb-3">
+      <div class="card-header">Planets</div>
+      <div class="card-body">
+        <router-link class="btn btn-sm btn-default" :to="{ name: 'planet-detail' }">Planets</router-link>
+      </div>
+    </div>
+    <!-- Films -->
+    <div class="card mb-3" v-if="filmIds">
+      <div class="card-header">Films : {{ filmIds.length }} items</div>
+      <div class="card-body">
+        <template v-for="filmId in filmIds" :key="filmId">
+          <router-link class="btn btn-sm btn-default" :to="{ name: 'film-detail', params: { filmId: filmId } }">Film ID
+            : {{ filmId }}</router-link>
+        </template>
+      </div>
+    </div>
+    <!-- Starships -->
+    <div class="card mb-3" v-if="starshipIds.length">
+      <div class="card-header">Starships : {{ starshipIds.length }} items</div>
+      <div class="card-body">
+        <template v-for="starshipId in starshipIds" :key="starshipId">
+          <router-link class="btn btn-sm btn-default" :to="{
+            name: 'starship-detail',
+            params: { starshipId: starshipId },
+          }">Starship ID : {{ starshipId }}</router-link>
+        </template>
+      </div>
+    </div>
+    <!-- Vehicles -->
+    <div class="card mb-3" v-if="vehicleIds.length">
+      <div class="card-header">Vehicles : {{ vehicleIds.length }} items</div>
+      <div class="card-body">
+        <template v-for="vehicleId in vehicleIds" :key="vehicleId">
+          <router-link class="btn btn-sm btn-default"
+            :to="{ name: 'vehicle-detail', params: { vehicleId: vehicleId } }">Vehicle ID : {{ vehicleId
+            }}</router-link>
+        </template>
+      </div>
+    </div>
+    <!-- Species -->
+    <div class="card mb-3" v-if="specyIds.length">
+      <div class="card-header">Species : {{ specyIds.length }} items</div>
+      <div class="card-body">
+        <template v-for="specyId in specyIds" :key="specyId">
+          <router-link class="btn btn-sm btn-default"
+            :to="{ name: 'specy-detail', params: { specyId: specyId } }">Species ID : {{ specyId }}</router-link>
+        </template>
+      </div>
+    </div>
   </template>
 </template>
 
@@ -29,20 +71,39 @@ export default {
   data() {
     return {
       user: {},
+      filmIds: [],
+      starshipIds: [],
+      vehicleIds: [],
+      specyIds: [],
       isLoading: true,
-    }
+    };
   },
   mounted() {
     this.isLoading = true;
     this.userId = this.$route.params.id;
     PeopleService.getPeopleById(this.userId).then((item) => {
       this.user = item.data;
+      this.filmIds = item.data.films.map((item) => {
+        return item.replace(/\/+$/, "").split("/").pop();
+      });
+
+      this.starshipIds = item.data.starships.map((item) => {
+        return item.replace(/\/+$/, "").split("/").pop();
+      });
+
+      this.vehicleIds = item.data.vehicles.map((item) => {
+        return item.replace(/\/+$/, "").split("/").pop();
+      });
+
+      this.specyIds = item.data.species.map((item) => {
+        return item.replace(/\/+$/, "").split("/").pop();
+      });
+
       this.isLoading = false;
     });
   },
-  methods: {
-  },
-}
+  methods: {},
+};
 </script>
 <style lang="scss" scoped>
 

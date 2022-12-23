@@ -8,31 +8,31 @@
   </div>
   <template v-if="!isLoading">
     <div class="card mb-3">
-      <div class="card-header">Film Info [ID : {{ filmId }}]</div>
+      <div class="card-header">Specy Info [ID : {{ specyId }}]</div>
       <div class="card-body">
-        <pre><code>{{ filmData }}</code></pre>
+        <pre><code>{{ specyData }}</code></pre>
       </div>
     </div>
   </template>
 </template>
 
 <script>
-import FilmService from "../../services/film.service.js";
+import SpecyService from "../../services/specy.service.js";
 
 export default {
-  name: "film-detail",
+  name: "specy-detail",
   components: {},
   data() {
     return {
-      filmData: "",
+      specyData: "",
       isLoading: true,
     };
   },
   mounted() {
     this.isLoading = true;
-    this.filmId = this.$route.params.filmId;
-    FilmService.getFilmById(this.filmId).then((data) => {
-        this.filmData = data.data;
+    this.specyId = this.$route.params.specyId;
+    SpecyService.getSpecyById(this.specyId).then((data) => {
+        this.specyData = data.data;
         this.isLoading = false;
       });
   },
