@@ -61,7 +61,6 @@ export default {
   methods: {
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
-      console.log(this.searchQuery);
     },
     hideSidebar() {
       this.$sidebar.displaySidebar(false);

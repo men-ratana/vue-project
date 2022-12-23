@@ -6,14 +6,15 @@
     <div class="card mb-3">
       <div class="card-header">Info</div>
       <div class="card-body">
-        <pre><code>{{ user }}</code></pre>
+        <pre><code>{{ userData }}</code></pre>
       </div>
     </div>
 
     <div class="card mb-3">
       <div class="card-header">Planets</div>
       <div class="card-body">
-        <router-link class="btn btn-sm btn-default" :to="{ name: 'planet-detail' }">Planets</router-link>
+        <router-link class="btn btn-sm btn-default"
+          :to="{ name: 'planet-detail', params: { planetId: planetId } }">Planets</router-link>
       </div>
     </div>
     <!-- Films -->
@@ -70,7 +71,8 @@ export default {
   components: {},
   data() {
     return {
-      user: {},
+      userData: {},
+      planetId: '',
       filmIds: [],
       starshipIds: [],
       vehicleIds: [],
@@ -82,23 +84,21 @@ export default {
     this.isLoading = true;
     this.userId = this.$route.params.id;
     PeopleService.getPeopleById(this.userId).then((item) => {
-      this.user = item.data;
-      this.filmIds = item.data.films.map((item) => {
+      const userData = item.data;
+      this.planetId = userData.homeworld.replace(/\/+$/, "").split("/").pop();
+      this.filmIds = userData.films.map((item) => {
         return item.replace(/\/+$/, "").split("/").pop();
       });
-
-      this.starshipIds = item.data.starships.map((item) => {
+      this.starshipIds = userData.starships.map((item) => {
         return item.replace(/\/+$/, "").split("/").pop();
       });
-
-      this.vehicleIds = item.data.vehicles.map((item) => {
+      this.vehicleIds = userData.vehicles.map((item) => {
         return item.replace(/\/+$/, "").split("/").pop();
       });
-
-      this.specyIds = item.data.species.map((item) => {
+      this.specyIds = userData.species.map((item) => {
         return item.replace(/\/+$/, "").split("/").pop();
       });
-
+      this.userData = userData;
       this.isLoading = false;
     });
   },

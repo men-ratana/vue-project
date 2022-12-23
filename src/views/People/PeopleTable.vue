@@ -66,7 +66,7 @@
       <div v-if="pagination.total === 0" class="text-center p-5">Empty Data</div>
     </div>
     <div v-if="pagination && pagination.total_pages !== 1">
-      <base-pagination :total="pagination.total" :perPage="per_page" :value="pagination.current_page"
+      <base-pagination :total="pagination.total" :perPage="pagination.per_page" :value="pagination.current_page"
         @input="onPaginationClicked" align="center" size="sm"></base-pagination>
     </div>
   </template>
@@ -104,6 +104,7 @@ export default {
           const data = res.data;
           const per_page = 10;
           this.pagination = {
+            'per_page': per_page,
             'current_page': options ? options.page : 1,
             'total_pages': Math.ceil(data.count / per_page) || 1,
             'total': data.count
